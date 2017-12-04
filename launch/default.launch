@@ -1,0 +1,22 @@
+<launch>
+<include file="$(find simple_turtlebot)/launch/simple_turtlebot.launch">
+	<arg name="world" value="$(find sensor_training_result)/worlds/scene_salon.world"/>
+	<arg name="xacro_file" value="$(find sensor_training_result)/urdf/simple_turtlebot.urdf.xacro"/>
+</include>
+
+<include file="$(find sensor_training)/launch/control.launch">
+</include>
+
+<node name="node_1" type="my_node.py" pkg="sensor_training_result">
+</node>
+
+<node name="node_lidar" type="camera_lidar.py" pkg="sensor_training">
+</node>
+
+<remap from="scan" to="/laser_velocity_controller/command" />
+
+
+<!-- <node name="node_ass" type="point_cloud_assembler" pkg="laser_assembler">
+</node> -->
+
+</launch>
